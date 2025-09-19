@@ -39,5 +39,5 @@ jobs:
 
       - name: Deploy to Kubernetes
         run: |
-            kubectl set image deployment/wisecow-deployment wisecow=shadab024/wisecow:latest
-            kubectl apply -f k8s/service.yaml
+          kubectl apply -f k8s/deployment.yaml
+          kubectl apply -f k8s/service.yaml
