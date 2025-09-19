@@ -34,9 +34,10 @@ jobs:
 
       - name: Set up kubectl
         run: |
-          echo "${{ secrets.KUBE_CONFIG }}" | base64 -d > $HOME/.kube/config
+            mkdir -p $HOME/.kube
+            echo "${{ secrets.KUBE_CONFIG }}" | base64 -d > $HOME/.kube/config
 
       - name: Deploy to Kubernetes
         run: |
-          kubectl apply -f k8s/deployment.yaml
-          kubectl apply -f k8s/service.yaml
+            kubectl set image deployment/wisecow-deployment wisecow=shadab024/wisecow:latest
+            kubectl apply -f k8s/service.yaml
