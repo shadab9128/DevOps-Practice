@@ -1,29 +1,46 @@
-# Cow wisdom web server
+# Wisecow Application
+
+Wisecow is a fun web application that serves wisdom quotes using `fortune` and `cowsay`. This project demonstrates **containerization, Kubernetes deployment, CI/CD automation, and TLS setup on AWS EKS**.
+
+---
+
+## Table of Contents
+
+1. [Project Overview](#project-overview)
+2. [Prerequisites](#prerequisites)
+3. [Local Docker Setup](#local-docker-setup)
+4. [Kubernetes Deployment](#kubernetes-deployment)
+5. [GitHub Actions CI/CD](#github-actions-cicd)
+6. [TLS / HTTPS Setup](#tls--https-setup)
+7. [Debugging Guide](#debugging-guide)
+8. [Useful Commands](#useful-commands)
+
+---
+
+## Project Overview
+
+- **Language / Environment:** Bash script, Docker, Kubernetes  
+- **Functionality:** Provides wisdom quotes via HTTP (and HTTPS after TLS setup)  
+- **CI/CD:** Automated Docker build, push, and Kubernetes deployment using GitHub Actions  
+- **Cloud:** AWS EKS with ALB Ingress and TLS
+
+---
 
 ## Prerequisites
 
-```
-sudo apt install fortune-mod cowsay -y
-```
+- **Local / EC2:** Docker, kubectl, AWS CLI, eksctl  
+- **AWS IAM:** Role or User with:
+  - `AmazonEKSClusterPolicy`
+  - `AmazonEKSWorkerNodePolicy`
+  - `AmazonEC2ContainerRegistryFullAccess`
+  - Permissions to manage ACM, EKS, and assume roles if needed
+- **Domain:** For HTTPS (optional for TLS), e.g., via Cloudflare or dpdns.org  
 
-## How to use?
+---
 
-1. Run `./wisecow.sh`
-2. Point the browser to server port (default 4499)
+## Local Docker Setup
 
-## What to expect?
-![wisecow](https://github.com/nyrahul/wisecow/assets/9133227/8d6bfde3-4a5a-480e-8d55-3fef60300d98)
-
-# Problem Statement
-Deploy the wisecow application as a k8s app
-
-## Requirement
-1. Create Dockerfile for the image and corresponding k8s manifest to deploy in k8s env. The wisecow service should be exposed as k8s service.
-2. Github action for creating new image when changes are made to this repo
-3. [Challenge goal]: Enable secure TLS communication for the wisecow app.
-
-## Expected Artifacts
-1. Github repo containing the app with corresponding dockerfile, k8s manifest, any other artifacts needed.
-2. Github repo with corresponding github action.
-3. Github repo should be kept private and the access should be enabled for following github IDs: nyrahul
-
+### 1. Build Docker Image
+'''bash
+docker build -t wisecow:test .
+'''
