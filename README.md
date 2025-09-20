@@ -41,6 +41,6 @@ Wisecow is a fun web application that serves wisdom quotes using `fortune` and `
 ## Local Docker Setup
 
 ### 1. Build Docker Image
-'''bash
+```bash
 docker build -t wisecow:test .
-'''
+```
