@@ -32,11 +32,11 @@ Wisecow is a fun web application that serves wisdom quotes using `fortune` and `
 
 ### 1. Build Docker Image
 ```bash
-docker build -t wisecow:test .
+docker build -t app-name .
 ```
 ### 2. Run Container
 ```bash
-docker run -p 4499:4499 wisecow:test
+docker run -p 4499:4499 app-name
 ```
 ### 3. Test Application
 ```bash
