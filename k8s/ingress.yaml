@@ -8,7 +8,7 @@ metadata:
     alb.ingress.kubernetes.io/target-type: ip
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80},{"HTTPS":443}]'
     alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:eu-north-1:435917083498:certificate/824e9cc6-ffb8-4a47-804e-2077c04df339
-    alb.ingress.kubernetes.io/ssl-redirect: "443"
+    alb.ingress.kubernetes.io/ssl-redirect: '443'
 spec:
   rules:
     - host: shadab.dpdns.org
@@ -31,3 +31,8 @@ spec:
                 name: wisecow-service
                 port:
                   number: 80
+  tls:
+    - hosts:
+        - shadab.dpdns.org
+        - www.shadab.dpdns.org
+      secretName: wisecow-tls
