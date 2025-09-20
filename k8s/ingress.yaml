@@ -2,34 +2,32 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: wisecow-ingress
-  namespace: default
   annotations:
     kubernetes.io/ingress.class: alb
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
-    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:eu-north-1:435917083498:certificate/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80},{"HTTPS":443}]'
-    alb.ingress.kubernetes.io/ssl-redirect: '443'
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:eu-north-1:<ACCOUNT_ID>:certificate/<CERTIFICATE_ID>
+    alb.ingress.kubernetes.io/ssl-redirect: "443"
 spec:
-  ingressClassName: alb   # 👈 This is the missing piece
   rules:
-  - host: shadab.dpdns.org
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: wisecow-service
-            port:
-              number: 80
-  - host: www.shadab.dpdns.org
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: wisecow-service
-            port:
-              number: 80
+    - host: shadab.dpdns.org
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: wisecow-service
+                port:
+                  number: 80
+    - host: www.shadab.dpdns.org
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: wisecow-service
+                port:
+                  number: 80
